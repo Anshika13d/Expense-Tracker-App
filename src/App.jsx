@@ -3,16 +3,24 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Dashboard from './Pages/Dashboard';
+import Dashboard, { dashboardLoader } from './Pages/Dashboard';
+import Error from "./Pages/Error";
+import Main, {mainLoader} from "./Layouts/Main";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />
-  },
-  {
-    path: "/about",
-    element: <h1>About Page</h1>
+    element: <Main />,
+    loader: mainLoader,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+        loader: dashboardLoader,
+        errorElement: <Error />,
+      },
+    ]
   },
 ]);
 
