@@ -1,6 +1,7 @@
 import React from 'react'
 import logomark from '../assets/logomark.svg'
 import { NavLink, Form } from 'react-router-dom'
+import { TrashIcon } from '@heroicons/react/24/solid'
 
 function Nav({userName}) {
   return (
@@ -14,7 +15,7 @@ function Nav({userName}) {
             userName && (
                 <Form 
                 method='POST' 
-                action='/logout'
+                action='logout'
                 onSubmit={(e) => {
                     if(!confirm("Delete user and all data?")){
                         e.preventDefault();
@@ -23,6 +24,7 @@ function Nav({userName}) {
                 >
                     <button type='submit' className='btn btn--warning'>
                         <span>Delete User</span>
+                        <TrashIcon width={20} />
                     </button>
                 </Form>
             )

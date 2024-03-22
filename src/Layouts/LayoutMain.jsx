@@ -13,7 +13,7 @@ export function mainLoader(){
     return { userName };
 }
 
-function Main() {
+function LayoutMain() {
   const { userName } = useLoaderData()
 
   return (
@@ -27,4 +27,4 @@ function Main() {
   )
 }
 
-export default Main
+export default LayoutMain
