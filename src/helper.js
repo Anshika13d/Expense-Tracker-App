@@ -1,4 +1,4 @@
-export const waiit = () => new Promise(res => setTimeout(res, Math.random() * 2000))
+export const waiit = () => new Promise(res => setTimeout(res, Math.random() * 1000))
 
 const generateRandomColor= () => {
     const existingBudgetLength = fetchData("budget")?. length?? 0;
@@ -41,10 +41,7 @@ export const createExpense = ({
 
 }
 
-//delete item
-export const deleteItem = ({key}) => {
-    return localStorage.removeItem(key);
-};
+
 
 //total spent by bdget
 export const calculateSpentByBudget = (budgetId) => {
@@ -73,4 +70,24 @@ export const formatCurrency = (amt) => {
         style: "currency",
         currency: "USD"
     })
+}
+
+//format date
+export const formatDateToLocale = (epoch) => new Date(epoch).toLocaleDateString();
+
+
+//from local storage
+export const getAllMatchingItems = ({category, key, value}) => {
+    const data = fetchData(category) ?? [];
+    return data.filter((item) => item[key] === value);
+}
+
+//delete ann item form local
+export const deleteItem = ({key, id}) =>{
+    const existingData = fetchData(key);
+    if(id){
+        const newData = existingData.filter((item) => item.id !== id);
+        return localStorage.setItem(key, JSON.stringify(newData));
+    }
+    return localStorage.removeItem(key)
 }
